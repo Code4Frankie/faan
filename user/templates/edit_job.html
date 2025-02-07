@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+        Staff Dashboard || FAAN JOBLOG
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+    <section class="section">
+      <div class="section-body">
+        <div class="row">
+          <div class="col-12 ">
+            <div class="card">
+              <div class="card-header">
+                <h4>Log In A Job</h4>
+              </div>
+                <form method="POST" class="card-body" novalidate="">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        <!-- Terminal Selection -->
+                        <div class="form-group">
+                            <label>Terminal</label>
+                            <select id="terminal" name="terminal" class="form-control">
+                                {% for terminal in terminals %}
+                                    <option value="{{ terminal.id }}" {% if terminal.id == job.terminal.id %}selected{% endif %}>{{ terminal.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Unit Selection -->
+                        <div class="form-group">
+                            <label>Unit</label>
+                            <select id="unit" name="unit" class="form-control">
+                                {% for unit in units %}
+                                    <option value="{{ unit.id }}" {% if unit.id == job.unit.id %}selected{% endif %}>{{ unit.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Date Input -->
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="datetime-local" name="date" class="form-control" value="{{ job.date }}">
+                        </div>
+
+                        <!-- Location Input -->
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" name="location" class="form-control" value="{{ job.location }}">
+                        </div>
+
+                        <!-- Equipment Input -->
+                        <div class="form-group">
+                            <label>Equipment</label>
+                            <input type="text" name="equipment" class="form-control" value="{{ job.equipment }}">
+                        </div>
+
+                        <!-- Fault Textarea -->
+                        <div class="form-group">
+                            <label>Fault</label>
+                            <textarea name="fault" class="form-control">{{ job.fault }}</textarea>
+                        </div>
+
+                        <!-- Rectification Textarea -->
+                        <div class="form-group">
+                            <label>Rectification</label>
+                            <textarea name="rectification" class="form-control">{{ job.rectification }}</textarea>
+                        </div>
+
+                        <!-- Status Radio Buttons -->
+                        <div class="form-group">
+                            <label>Status</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="status_pending" name="status" value="Pending" {% if job.status == 'Pending' %}checked{% endif %}>
+                                <label class="form-check-label" for="status_pending">Pending</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" id="status_completed" name="status" value="Completed" {% if job.status == 'Completed' %}checked{% endif %}>
+                                <label class="form-check-label" for="status_completed">Completed</label>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="card-footer text-right">
+                        <button class="btn btn-primary mr-1" type="submit">Update</button>
+                        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+
+
+            </div>
+
+          </div>
+          
+        </div>
+      </div>
+    </section>
+    
+  </div>
+
+
+
+
+
+
+{% endblock %}

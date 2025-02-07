@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+        Staff Dashboard || FAAN JOBLOG
+{% endblock %}
+
+{% block content %}
+
+
+<div class="main-content">
+    <section class="section">
+      <div class="section-body">
+      
+
+        <h2 class="section-title">{{ terminal_name }}</h2>
+        <p class="section-lead">List of Units:</p>
+
+        <div class="row">
+          {% for unit in units %}
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h4>{{ unit.name }}</h4>
+              </div>
+              <div class="card-body">
+                <p><a class="btn btn-info" href="{% url 'unit_report' %}?unit_id={{ unit.id }}">See Report</a></p>
+                <p><a class="btn btn-info" href="{% url 'download_terminal_report' unit.id %}">Download Report</a></p>
+
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+
+          
+        </div>
+      
+    
+
+      </div>
+    </section>
+ 
+  </div>
+
+
+  {% endblock %}

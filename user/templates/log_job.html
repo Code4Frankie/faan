@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+        Staff Dashboard || FAAN JOBLOG
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+    <section class="section">
+      <div class="section-body">
+        <div class="row">
+          <div class="col-12 ">
+            <div class="card">
+              <div class="card-header">
+                <h4>Log In A Job</h4>
+              </div>
+          <!-- log_job.html -->
+
+<form method="POST" class="card-body" novalidate="">
+    {% csrf_token %}
+    <div class="card-body">
+        <!-- Terminal Selection -->
+  
+
+<div class="form-group">
+    <label>Terminal</label>
+    <select id="terminal" name="terminal" class="form-control">
+        <option value="" selected>Please select</option>
+        {% for terminal in terminals %}
+            <option value="{{ terminal.id }}">{{ terminal.name }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+<div class="form-group">
+    <label>Unit</label>
+    <select id="unit" name="unit" class="form-control">
+        <option value="" disabled selected>Select Terminal First</option>
+    </select>
+</div>
+
+
+        <!-- Date Input -->
+        <div class="form-group">
+            <label>Date of fault</label>
+            <input type="datetime-local" name="date" class="form-control">
+        </div>
+
+        <!-- Location Input -->
+        <div class="form-group">
+            <label>Place of fault</label>
+            <input type="text" name="location" class="form-control">
+        </div>
+
+        <!-- Equipment Input -->
+        <div class="form-group">
+            <label>Equipment</label>
+            <input type="text" name="equipment" class="form-control">
+        </div>
+
+        <!-- Fault Textarea -->
+        <div class="form-group">
+            <label>Fault</label>
+            <textarea name="fault" class="form-control"></textarea>
+        </div>
+
+        <!-- Rectification Textarea -->
+        <div class="form-group">
+            <label>Rectification</label>
+            <textarea name="rectification" class="form-control"></textarea>
+        </div>
+
+        <!-- Status Checkbox -->
+        <div class="form-group">
+            <label>Status</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="status_pending" name="status" value="Pending" checked>
+                <label class="form-check-label" for="status_pending">
+                    Pending
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="status_completed" name="status" value="Completed">
+                <label class="form-check-label" for="status_completed">
+                    Completed
+                </label>
+            </div>
+        </div>
+        
+    </div>
+    <div class="card-footer text-right">
+        <button class="btn btn-primary mr-1" type="submit">Submit</button>
+        <button class="btn btn-secondary" type="reset">Reset</button>
+    </div>
+</form>
+
+            </div>
+
+          </div>
+          
+        </div>
+      </div>
+    </section>
+    
+  </div>
+
+
+
+<!-- log_job.html -->
+
+<script>
+    document.getElementById('terminal').addEventListener('change', function() {
+        var terminalId = this.value;
+        var unitSelect = document.getElementById('unit');
+        unitSelect.innerHTML = '<option value="" disabled selected>Loading...</option>';
+        
+        fetch('/get_units/?terminal_id=' + terminalId)
+            .then(response => response.json())
+            .then(data => {
+                unitSelect.innerHTML = '<option value="" disabled selected>Select Unit</option>';
+                data.forEach(unit => {
+                    var option = document.createElement('option');
+                    option.value = unit.id;
+                    option.textContent = unit.name;
+                    unitSelect.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching units:', error);
+                unitSelect.innerHTML = '<option value="" disabled selected>Error Loading Units</option>';
+            });
+    });
+</script>
+
+
+
+{% endblock %}

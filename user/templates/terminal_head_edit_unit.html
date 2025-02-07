@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+       Edit terminal || FAAN
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+    <section class="section">
+      <div class="section-body">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Edit Unit: {{ unit.name }}</h4>
+                </div>
+                <form method="POST" class="card-body" novalidate="">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        <!-- Unit Name Input -->
+                        <div class="form-group row mb-4">
+                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Unit Name</label>
+                            <div class="col-sm-12 col-md-7">
+                                <input type="text" name="unit_name" class="form-control" value="{{ unit.name }}">
+                            </div>
+                        </div>
+                        <!-- Unit Head Input -->
+                        <div class="form-group row mb-4">
+                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Unit Head</label>
+                            <div class="col-sm-12 col-md-7">
+                                <select name="unit_head" class="form-control">
+                                    {% for user in department_users %}
+                                        <option value="{{ user.id }}" {% if user.id == unit.unit_head.id %} selected {% endif %}>{{ user.first_name }} {{ user.last_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Submit Button -->
+                        <div class="form-group row mb-4">
+                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                            <div class="col-sm-12 col-md-7">
+                                <button type="submit" class="btn btn-primary">Update Unit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+
+          </div>
+        </div>
+      </div>
+    </section>
+  
+  </div>
+
+
+
+
+ 
+{% endblock %}

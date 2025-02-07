@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+        Staff Dashboard || FAAN JOBLOG
+{% endblock %}
+
+{% block content %}
+
+
+
+
+<div class="main-content">
+  <section class="section">
+
+    <div class="row "> 
+        <h4 class="ml-3">Welcome To FAAN {{ department_name }} </h4>
+  </div>
+
+    <div class="row ">
+      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="card">
+          <div class="card-statistic-4">
+            <div class="align-items-center justify-content-between">
+              <div class="row ">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                  <div class="card-content">
+                    <h5 class="font-15">Total Terminals</h5>
+                    <h2 class="mb-3 font-18">{{ total_terminals }}</h2>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                  <div class="banner-img">
+                    <img src="{% static 'assets/img/banner/1.png' %}" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="card">
+          <div class="card-statistic-4">
+            <div class="align-items-center justify-content-between">
+              <div class="row ">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                  <div class="card-content">
+                    <h5 class="font-15"> Total Units</h5>
+                    <h2 class="mb-3 font-18">{{ total_units }}</h2>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                  <div class="banner-img">
+                    <img src="{% static 'assets/img/banner/2.png' %}" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="card">
+          <div class="card-statistic-4">
+            <div class="align-items-center justify-content-between">
+              <div class="row ">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                  <div class="card-content">
+                    <a href="{% url 'log_job' %}">
+                    <h5 class="font-15">Log in A Job</h5>
+                    <h2 class="mb-3 font-18">Click Here</h2>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                  <div class="banner-img">
+                    <img src="{% static 'assets/img/banner/3.png' %}" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="card">
+          <div class="card-statistic-4">
+            <div class="align-items-center justify-content-between">
+              <div class="row ">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                  <div class="card-content">
+                    <h5 class="font-15">My Logs</h5>
+                    <h2 class="mb-3 font-18">{{ num_jobs_logged }}</h2>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                  <div class="banner-img">
+                    <img src="{% static 'assets/img/banner/4.png' %}" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+
+    {% if terminal %}
+    <div class="row">
+      <h4 class="ml-3">{{ terminal.name }} Terminal Overview</h4>
+    </div>
+    
+    <div class="row">
+      <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="card">
+          <div class="card-statistic-4">
+            <div class="align-items-center justify-content-between">
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                  <div class="card-content">
+                    <h5 class="font-15">Total Units in {{ terminal.name }}</h5>
+                    <h2 class="mb-3 font-18">{{ terminal_units_count }}</h2>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                  <div class="banner-img">
+                    <img src="{% static 'assets/img/banner/2.png' %}" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    
+    
+
+    
+
+
+  </section>
+
+</div>
+
+
+{% endblock %}
