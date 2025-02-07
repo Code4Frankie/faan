@@ -1,0 +1,71 @@
+{% extends 'admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+        Admin Dashboard || FAAN JOBLOG
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+    <section class="section">
+      <div class="section-body">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>View HOD</h4>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-md">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Department</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for hod in hods %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ hod.first_name }} {{ hod.last_name }}</td>
+                                    <td>{{ hod.email }}</td>
+                                    <td>{{ hod.department.name }}</td>
+                                    <td>
+                                        {% if hod.password_changed %}
+                                        <div class="badge badge-success">Active</div>
+                                        {% else %}
+                                        <div class="badge badge-danger">Not Active</div>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <form method="post" action="{% url 'delete_hod' hod.id %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+        
+          </div>
+      </div>
+    </section>
+  
+  </div>
+
+
+  {% endblock %}
+
+
+

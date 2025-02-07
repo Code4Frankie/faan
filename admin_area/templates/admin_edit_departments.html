@@ -1,0 +1,76 @@
+
+{% extends 'admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+        Admin Profile || FAAN JOBLOG
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="main-content">
+    <section class="section">
+      <div class="section-body">
+        <h2 class="section-title">Edit or Delete A Department</h2>
+        
+        {% if departments %}
+
+        <div class="row">
+
+          {% for department in departments %}
+
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+            <article class="article">
+              <div class="article-header">
+                <div class="article-image" data-background="{% static 'assets/img/blog/img02.png' %} ">
+                </div>
+                <div class="article-title">
+                  <h2><a href="#">{{ department.name }}</a></h2>
+                </div>
+              </div>
+              <div class="article-details">
+                <h6>
+                  {% if department.hod %}{{ department.hod.first_name }} {{ department.hod.last_name }}{% else %}No HOD assigned{% endif %}
+                  
+               </h6>
+
+               <h6>Terminals: {{ department.num_terminals }}
+
+               </h6>
+               <h6>
+                Units: {{ department.num_units }}
+               </h6>
+                <div class="article-cta">
+                  <a href="{% url 'edit_department' department.id %}" class="btn btn-primary">Edit </a>
+                  <a href="#" class="btn btn-danger" onclick="confirmDelete('{{ department.id }}')" >Delete </a>
+
+                </div>
+              </div>
+            </article>
+          </div>
+          {% endfor %}
+
+      </div>
+      {% else %}
+<p>No departments found.</p>
+{% endif %}
+
+    </section>
+  
+  </div>
+
+
+
+
+  <script>
+    function confirmDelete(departmentId) {
+        if (confirm("Are you sure you want to delete this department? This action is irreversible.")) {
+            window.location.href = "{% url 'delete_department' %}?id=" + departmentId;
+        }
+    }
+</script>
+
+  {% endblock %}

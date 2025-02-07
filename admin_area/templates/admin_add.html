@@ -1,0 +1,86 @@
+
+{% extends 'admin_base.html' %}
+
+{% load static %}
+
+{% block title %}
+        Admin Profile || FAAN JOBLOG
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="main-content">
+    <section class="section">
+      <div class="section-body">
+        <div class="row mt-sm-4">
+         
+          <div class="col-12 col-md-12 col-lg-8">
+            <div class="card">
+              <div class="padding-20">
+                <ul class="nav nav-tabs" id="myTab2" role="tablist">
+                
+                  <li class="nav-item">
+                    <a class="nav-link" id="profile-tab2" data-toggle="tab" href="" role="tab"
+                      aria-selected="false">Add A New HOD</a>
+                  </li>
+                </ul>
+                <div class="tab-content tab-bordered" id="myTab3Content">
+              
+                  <div class="tab-pane fade show active" id="settings" role="tabpanel" aria-labelledby="profile-tab2">
+                    <form method="post" class="needs-validation">
+                        {% csrf_token %}
+                        <div class="card-header">
+                            <h4>Add HOD</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-6 col-12">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control" name="first_name" required>
+                                </div>
+                                <div class="form-group col-md-6 col-12">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control" name="last_name" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6 col-12">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" name="email" required>
+                                </div>
+                                <div class="form-group col-md-6 col-12">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" name="password" required>
+                                </div>
+                                <div class="form-group col-md-6 col-12">
+                                    <label>Select Department</label>
+                                    <select class="form-control" name="department" required>
+                                        <option value="">Select Department</option>
+                                        {% for department in departments %}
+                                            <option value="{{ department.id }}">{{ department.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <button class="btn btn-primary" type="submit">Add HOD</button>
+                        </div>
+                    </form>
+                    
+                  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+  </div>
+
+
+  {% endblock %}
