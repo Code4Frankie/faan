@@ -1,0 +1,71 @@
+{% extends 'hod_base.html' %}
+
+{% load static %}
+
+{% block title %}
+        Add New Termina || FAAN
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+    <section class="section">
+      <div class="section-body">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h4>Add a New Terminal</h4>
+              </div>
+              
+<form method="POST" class="card-body" novalidate="">
+  {% csrf_token %}
+  <div class="card-body">
+      <!-- Terminal Name Input -->
+      <div class="form-group row mb-4">
+          <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Terminal Name</label>
+          <div class="col-sm-12 col-md-7">
+              <input type="text" name="terminal_name" class="form-control">
+          </div>
+      </div>
+
+      <!-- Terminal Head Selection -->
+      <div class="form-group row mb-4">
+          <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Terminal Head</label>
+          <div class="col-sm-12 col-md-7">
+            <select name="terminal_head" class="form-control">
+              <option value="" selected>Please select</option>
+              {% for user in department_users %}
+                  <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
+              {% endfor %}
+          </select>
+          
+          </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="form-group row mb-4">
+          <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+          <div class="col-sm-12 col-md-7">
+              <button type="submit" class="btn btn-primary">Create Terminal</button>
+          </div>
+      </div>
+  </div>
+</form>
+
+            
+            
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+  </div>
+
+
+
+
+ 
+{% endblock %}
